@@ -80,3 +80,56 @@ bool Detectar_combinaciones(const unsigned char* tablero, int filas, int columna
     }
     return false;
 }
+
+void Eliminar_marcadas(unsigned char* tablero, int filas, int columnas, const bool* marcado) {
+    for (int f = 0; f < filas; f++) {
+        for (int c = 0; c < columnas; c++) {
+            int indice = f * columnas + c;
+            if (marcado[indice]) {
+                Escribir_ficha(tablero, columnas, f, c, 6);   // 6 = vacio
+            }
+        }
+    }
+}
+
+void Aplicar_gravedad(unsigned char* tablero, int filas, int columnas) {
+    for (int c = 0; c < columnas; c++) {
+        int filaEscritura = filas - 1;
+
+        for (int f = filas - 1; f >= 0; f--) {
+            int valor = Extraer_ficha(tablero, columnas, f, c);
+
+            if (valor != 6) {
+                if (f != filaEscritura) {
+                    Escribir_ficha(tablero, columnas, filaEscritura, c, valor);
+                    Escribir_ficha(tablero, columnas, f, c, 6);
+                }
+                filaEscritura--;
+            }
+        }
+    }
+}
+
+void Rellenar_vacios(unsigned char* tablero, int filas, int columnas) {
+    for (int f = 0; f < filas; f++) {
+        for (int c = 0; c < columnas; c++) {
+            int valor = Extraer_ficha(tablero, columnas, f, c);
+            if (valor == 6) {
+                int nuevo = Generar_ficha_aleatoria();
+                Escribir_ficha(tablero, columnas, f, c, nuevo);
+            }
+        }
+    }
+}
+
+void Procesar_cascadas(unsigned char* tablero, int filas, int columnas, bool* marcado) {
+    bool hayCombinacion = Detectar_combinaciones(tablero, filas, columnas, marcado);
+
+    while (hayCombinacion) {
+        Eliminar_marcadas(tablero, filas, columnas, marcado);
+        Aplicar_gravedad(tablero, filas, columnas);
+        Rellenar_vacios(tablero, filas, columnas);
+
+        hayCombinacion = Detectar_combinaciones(tablero, filas, columnas, marcado);
+    }
+}
