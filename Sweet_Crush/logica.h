@@ -12,6 +12,14 @@ void Eliminar_marcadas(unsigned char* tablero, int filas, int columnas, const bo
 void Aplicar_gravedad(unsigned char* tablero, int filas, int columnas);
 
 void Rellenar_vacios(unsigned char* tablero, int filas, int columnas);
-void Procesar_cascadas(unsigned char* tablero, int filas, int columnas, bool* marcado);
 
-#endif // LOGICA_H
+void Procesar_cascadas(unsigned char* tablero, int filas, int columnas, bool* marcado,int* combinacionesTotales,
+                       int* fichasTotales, int* cascadasTotales,int* combinacionesEstaJugada, int* fichasEstaJugada,
+                       int* cascadasEstaJugada,int* puntuacion);
+
+bool Eliminar_ficha_jugador(unsigned char* tablero, int filas, int columnas, int fila, int columna, bool* marcado,
+                            int* eliminacionesDirectas,int* combinacionesTotales, int* fichasTotales, int* cascadasTotales,
+                            int* combinacionesEstaJugada, int* fichasEstaJugada, int* cascadasEstaJugada,int* puntuacion);
+
+
+#endif

@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        Estadisticas.cpp \
         Interfaz.cpp \
         bitwise.cpp \
         logica.cpp \
@@ -11,6 +12,7 @@ SOURCES += \
         memoria.cpp
 
 HEADERS += \
+    Estadisticas.h \
     Interfaz.h \
     Memoria.h \
     bitwise.h \

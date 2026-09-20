@@ -19,10 +19,20 @@ char Convertir_caracter(int valorFicha) {
 }
 
 void Mostrar_tablero(const unsigned char* tablero, int filas, int columnas) {
+    cout << "    ";
+    for (int c = 0; c < columnas; c++) {
+        if (c < 10) cout << "  " << c;
+        else cout << " " << c;
+    }
+    cout << "\n";
+
     for (int f = 0; f < filas; f++) {
+        if (f < 10) cout << "  " << f << " ";
+        else cout << " " << f << " ";
+
         for (int c = 0; c < columnas; c++) {
             int valor = Extraer_ficha(tablero, columnas, f, c);
-            cout << Convertir_caracter(valor) << ' ';
+            cout << "  " << Convertir_caracter(valor);
         }
         cout << "\n";
     }
