@@ -18,7 +18,9 @@ char Convertir_caracter(int valorFicha) {
     }
 }
 
-void Mostrar_tablero(const unsigned char* tablero, int filas, int columnas) {
+void Mostrar_tablero(const unsigned char* tablero, int filas, int columnas, int capacidadBytes) {
+    int offsetInicial = Calcular_offset_inicial(filas, columnas, capacidadBytes);
+
     cout << "    ";
     for (int c = 0; c < columnas; c++) {
         if (c < 10) cout << "  " << c;
@@ -31,7 +33,7 @@ void Mostrar_tablero(const unsigned char* tablero, int filas, int columnas) {
         else cout << " " << f << " ";
 
         for (int c = 0; c < columnas; c++) {
-            int valor = Extraer_ficha(tablero, columnas, f, c);
+            int valor = Extraer_ficha(tablero, columnas, f, c, offsetInicial);
             cout << "  " << Convertir_caracter(valor);
         }
         cout << "\n";
